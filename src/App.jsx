@@ -19,26 +19,25 @@ function FloatingLetters() {
 
   return (
     <div className="absolute inset-0 flex justify-center pointer-events-none z-10">
-   <div className="flex space-x-2 flex-nowrap justify-center sm:space-x-1 md:space-x-2 lg:space-x-3">
-
+      <div className="flex space-x-1 sm:space-x-1 md:space-x-2 lg:space-x-3 flex-nowrap justify-center">
         {fallingLetters.map(({ letter, key, animationDelay, positionX, fallDuration }) => (
-         <div
-         key={key}
-         className="text-5xl sm:text-6xl md:text-7xl font-extrabold text-gradient opacity-80 transform"
-         style={{
-           animation: `fall ${fallDuration} linear infinite, float 7s ease-in-out forwards, rotate 3s ease-in-out forwards`,
-           animationDelay,
-           left: `${positionX}%`,
-           transform: `rotate(${Math.random() * 30 - 15}deg)`,
-           background: "linear-gradient(90deg, rgba(255, 0, 150, 1) 0%, rgba(0, 204, 255, 1) 100%)",
-           WebkitBackgroundClip: "text",
-           color: "yellow",
-           textShadow: `0 0 10px rgba(255, 255, 255, 0.5), 0 0 20px rgba(255, 0, 150, 0.5)`,
-           whiteSpace: "nowrap",  // Added this line to prevent line breaks
-         }}
-       >
-         {letter}
-       </div>
+          <div
+            key={key}
+            className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-gradient opacity-80 transform tracking-tight"
+            style={{
+              animation: `fall ${fallDuration} linear infinite, float 7s ease-in-out forwards, rotate 3s ease-in-out forwards`,
+              animationDelay,
+              left: `${positionX}%`,
+              transform: `rotate(${Math.random() * 30 - 15}deg)`,
+              background: "linear-gradient(90deg, rgba(255, 0, 150, 1) 0%, rgba(0, 204, 255, 1) 100%)",
+              WebkitBackgroundClip: "text",
+              color: "yellow",
+              textShadow: `0 0 10px rgba(255, 255, 255, 0.5), 0 0 20px rgba(255, 0, 150, 0.5)`,
+              whiteSpace: "nowrap",
+            }}
+          >
+            {letter}
+          </div>
         ))}
       </div>
       <style>{`
@@ -55,6 +54,7 @@ function FloatingLetters() {
     </div>
   );
 }
+
 
 const KeywordPage = ({ onCorrectKeyword }) => {
   const [input, setInput] = useState("");
