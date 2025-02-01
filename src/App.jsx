@@ -155,6 +155,14 @@ function FloatingLanterns() {
 function MoonAndStars() {
   return (
     <div className="absolute inset-0 pointer-events-none overflow-hidden">
+      <div className="flex justify-center  h-screen mt-24">
+  <img 
+    src="/assets/satu.jpg" 
+    alt="Enter Icon" 
+    className="w-98 h-72 sm:w-64 sm:h-48 text-white" 
+  />
+</div>
+
     <div className="absolute top-28 right-10 w-32 h-32 sm:w-40 sm:h-40 bg-yellow-500 bg-opacity-50 rounded-full shadow-lg backdrop-blur-lg"></div>
 
       {Array.from({ length: 100 }).map((_, index) => (
