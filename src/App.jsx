@@ -19,7 +19,7 @@ function FloatingLetters() {
 
   return (
     <div className="absolute inset-0 flex justify-center pointer-events-none z-10">
-      <div className="flex space-x-2 flex-wrap justify-center sm:space-x-4 md:space-x-6 lg:space-x-8">
+      <div className="flex space-x-2 flex-wrap justify-center sm:space-x-1 md:space-x-2 lg:space-x-3">
         {fallingLetters.map(({ letter, key, animationDelay, positionX, fallDuration }) => (
          <div
          key={key}
@@ -154,7 +154,7 @@ function FloatingLanterns() {
 function MoonAndStars() {
   return (
     <div className="absolute inset-0 pointer-events-none overflow-hidden">
-    <div className="absolute top-28 right-10 w-32 h-32 sm:w-40 sm:h-40 bg-blue-200 bg-opacity-50 rounded-full shadow-lg backdrop-blur-lg"></div>
+    <div className="absolute top-28 right-10 w-32 h-32 sm:w-40 sm:h-40 bg-yellow-500 bg-opacity-50 rounded-full shadow-lg backdrop-blur-lg"></div>
 
       {Array.from({ length: 100 }).map((_, index) => (
         <div
