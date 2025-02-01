@@ -19,7 +19,8 @@ function FloatingLetters() {
 
   return (
     <div className="absolute inset-0 flex justify-center pointer-events-none z-10">
-      <div className="flex space-x-2 flex-wrap justify-center sm:space-x-1 md:space-x-2 lg:space-x-3">
+   <div className="flex space-x-2 flex-nowrap justify-center sm:space-x-1 md:space-x-2 lg:space-x-3">
+
         {fallingLetters.map(({ letter, key, animationDelay, positionX, fallDuration }) => (
          <div
          key={key}
