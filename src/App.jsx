@@ -21,22 +21,23 @@ function FloatingLetters() {
     <div className="absolute inset-0 flex justify-center pointer-events-none z-10">
       <div className="flex space-x-2 flex-wrap justify-center sm:space-x-4 md:space-x-6 lg:space-x-8">
         {fallingLetters.map(({ letter, key, animationDelay, positionX, fallDuration }) => (
-          <div
-            key={key}
-            className="text-5xl sm:text-6xl md:text-7xl font-extrabold text-gradient opacity-80 transform"
-            style={{
-              animation: `fall ${fallDuration} linear infinite, float 7s ease-in-out forwards, rotate 3s ease-in-out forwards`,
-              animationDelay,
-              left: `${positionX}%`,
-              transform: `rotate(${Math.random() * 30 - 15}deg)`,
-              background: "linear-gradient(90deg, rgba(255, 0, 150, 1) 0%, rgba(0, 204, 255, 1) 100%)",
-              WebkitBackgroundClip: "text",
-              color: "yellow",
-              textShadow: `0 0 10px rgba(255, 255, 255, 0.5), 0 0 20px rgba(255, 0, 150, 0.5)`,
-            }}
-          >
-            {letter}
-          </div>
+         <div
+         key={key}
+         className="text-5xl sm:text-6xl md:text-7xl font-extrabold text-gradient opacity-80 transform"
+         style={{
+           animation: `fall ${fallDuration} linear infinite, float 7s ease-in-out forwards, rotate 3s ease-in-out forwards`,
+           animationDelay,
+           left: `${positionX}%`,
+           transform: `rotate(${Math.random() * 30 - 15}deg)`,
+           background: "linear-gradient(90deg, rgba(255, 0, 150, 1) 0%, rgba(0, 204, 255, 1) 100%)",
+           WebkitBackgroundClip: "text",
+           color: "yellow",
+           textShadow: `0 0 10px rgba(255, 255, 255, 0.5), 0 0 20px rgba(255, 0, 150, 0.5)`,
+           whiteSpace: "nowrap",  // Added this line to prevent line breaks
+         }}
+       >
+         {letter}
+       </div>
         ))}
       </div>
       <style>{`
@@ -57,7 +58,7 @@ function FloatingLetters() {
 const KeywordPage = ({ onCorrectKeyword }) => {
   const [input, setInput] = useState("");
   const [error, setError] = useState("");
-  const correctKeyword = "kritya"; // Predefined key
+  const correctKeyword = "bhutpie"; // Predefined key
 
   const handleSubmit = () => {
     if (input.toLowerCase() === correctKeyword.toLowerCase()) {
@@ -123,7 +124,7 @@ function FloatingLanterns() {
           }}
         >
           <div
-            className="w-full h-full bg-gradient-to-r from-yellow-200 to-orange-400 rounded-full shadow-lg"
+            className="w-full h-full bg-gradient-to-r from-yellow-400 to-blue-400 rounded-full shadow-lg"
             style={{
               borderRadius: "50%",
               boxShadow: `0 4px 10px rgba(255, 215, 0, 0.5), 0 0 20px rgba(255, 215, 0, 0.5)`,
@@ -153,7 +154,8 @@ function FloatingLanterns() {
 function MoonAndStars() {
   return (
     <div className="absolute inset-0 pointer-events-none overflow-hidden">
-      <div className="absolute top-10 right-10 w-32 h-32 sm:w-40 sm:h-40 bg-yellow-200 rounded-full shadow-lg"></div>
+    <div className="absolute top-28 right-10 w-32 h-32 sm:w-40 sm:h-40 bg-blue-200 bg-opacity-50 rounded-full shadow-lg backdrop-blur-lg"></div>
+
       {Array.from({ length: 100 }).map((_, index) => (
         <div
           key={index}
@@ -197,15 +199,16 @@ const HomePage = ({ onKeywordEnter }) => {
         objectFit: 'cover',
       }}
     >
-      <div className="text-center">
-        <button onClick={onKeywordEnter}>
-          <img 
-            src="/assets/svg.svg" 
-            alt="Enter Icon" 
-            className="w-16 h-14 sm:w-20 sm:h-16 text-white"
-          />
-        </button>
-      </div>
+     <div className="text-center sm:text-left flex  mr-48">
+  <button onClick={onKeywordEnter}>
+    <img 
+      src="/assets/svg.svg" 
+      alt="Enter Icon" 
+      className="w-16 h-14 sm:w-20 sm:h-16 text-white"
+    />
+  </button>
+</div>
+
     </div>
   );
 };
@@ -213,16 +216,17 @@ const HomePage = ({ onKeywordEnter }) => {
 function RomanticNight({ onBack }) {
   const [showMessage, setShowMessage] = useState(false);
   const audioRef = useRef(null);
-  useEffect(() => {
-    audioRef.current = new Audio('/audio/happy-birthday.mp3');
-    audioRef.current.play().catch(error => console.log("Audio play failed:", error));
-    return () => {
-      if (audioRef.current) {
-        audioRef.current.pause();
-        audioRef.current.currentTime = 0;
-      }
-    };
-  }, []);
+    useEffect(() => {
+      audioRef.current = new Audio('/assets/AUDIO.mp3');
+      audioRef.current.loop = true; // Enable looping
+      audioRef.current.play().catch(error => console.log("Audio play failed:", error));
+      return () => {
+        if (audioRef.current) {
+          audioRef.current.pause();
+          audioRef.current.currentTime = 0;
+        }
+      };
+    }, []);
 
   useEffect(() => {
     setTimeout(() => setShowMessage(true), 5000);
@@ -233,30 +237,32 @@ function RomanticNight({ onBack }) {
       <MoonAndStars />
       <FloatingLanterns />
       <FloatingLetters />
-      <div className="max-w-3xl rounded-xl p-6 text-center backdrop-blur-sm bg-opacity-50 bg-rose-700-400 shadow-2xl absolute bottom-10 left-1/2 transform -translate-x-1/2">
-        {/* {showMessage && (
-          <div>
-            <h1 className="text-5xl sm:text-6xl font-extrabold text-gradient text-yellow-200 mb-4 transform scale-110 transition-transform duration-300 ease-out text-shadow-lg">
-              My Dearest Love
-            </h1>
-            <p className="mt-4 text-lg sm:text-xl text-gradient text-white">
-              Under the moonlight, my heart beats for you. Every star in the sky reminds me of your beauty and the love we share. Tonight, let's make memories that will last a lifetime. ❤️
-            </p>
-          </div>
-        )} */}
-        <div className="mt-12">
-          <h2 className="text-xl sm:text-2xl font-semibold mb-4 text-yellow-200">A Special Message for You:</h2>
-          <p className="text-sm sm:text-base text-white">
-            "In your eyes, I found my home. In your heart, I found my love. In your soul, I found my mate. With you, I am whole, full, alive. You make me feel real. I love you, my darling."
-          </p>
-        </div>
-        <button
-          onClick={onBack}
-          className="mt-6 bg-pink-600 text-white py-2 px-4 rounded-lg hover:bg-pink-700 transition duration-300 transform hover:scale-105 shadow-lg"
-        >
-          Back to Home
-        </button>
-      </div>
+      <div className="w-full max-w-lg sm:max-w-xl md:max-w-2xl lg:max-w-3xl xl:max-w-4xl rounded-xl p-6 text-center backdrop-blur-sm bg-opacity-50 bg-rose-700-400 shadow-2xl absolute bottom-10 left-1/2 transform -translate-x-1/2 px-4 sm:px-6 md:px-8">
+  {showMessage && (
+    <div>
+      <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-gradient text-yellow-200 mb-4 transform scale-110 transition-transform duration-300 ease-out text-shadow-lg">
+        My Dearest Love Kritika
+      </h1>
+      <p className="mt-4 text-base sm:text-lg md:text-xl text-gradient text-white">
+        Under the moonlight, my heart beats for you. Every star in the sky reminds me of your beauty and the love we share. Tonight, let's make memories that will last a lifetime. ❤️
+      </p>
+    </div>
+  )}
+  <div className="mt-12">
+    <h2 className="text-lg sm:text-xl md:text-2xl font-semibold mb-4 text-yellow-200">A Special Message for You:</h2>
+    <p className="text-sm sm:text-base md:text-lg text-white">
+      "Count your life by smiles, not tears. Count your age by friends, not years. Happiest birthday! 🥳🎂 My lovely Cutie 🥰 I love you, my darling."
+    </p>
+  </div>
+  <button
+    onClick={onBack}
+    className="mt-6 bg-pink-600 text-white py-2 px-4 rounded-lg hover:bg-pink-700 transition duration-300 transform hover:scale-105 shadow-lg"
+  >
+    Back to Home
+  </button>
+</div>
+
+
     </div>
   );
 }
