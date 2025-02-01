@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { useRef } from "react";
 import "tailwindcss/tailwind.css";
 
-
 function FloatingLetters() {
   const letters = "Happy Birthday".split("");
   const [fallingLetters, setFallingLetters] = useState([]);
@@ -20,16 +19,16 @@ function FloatingLetters() {
 
   return (
     <div className="absolute inset-0 flex justify-center pointer-events-none z-10">
-      <div className="flex space-x-2">
+      <div className="flex space-x-2 flex-wrap justify-center sm:space-x-4 md:space-x-6 lg:space-x-8">
         {fallingLetters.map(({ letter, key, animationDelay, positionX, fallDuration }) => (
           <div
             key={key}
-            className="text-8xl font-extrabold text-gradient opacity-80 transform"
+            className="text-5xl sm:text-6xl md:text-7xl font-extrabold text-gradient opacity-80 transform"
             style={{
               animation: `fall ${fallDuration} linear infinite, float 7s ease-in-out forwards, rotate 3s ease-in-out forwards`,
               animationDelay,
               left: `${positionX}%`,
-              transform: `rotate(${Math.random() * 30 - 15}deg)`,  
+              transform: `rotate(${Math.random() * 30 - 15}deg)`,
               background: "linear-gradient(90deg, rgba(255, 0, 150, 1) 0%, rgba(0, 204, 255, 1) 100%)",
               WebkitBackgroundClip: "text",
               color: "yellow",
@@ -41,10 +40,10 @@ function FloatingLetters() {
         ))}
       </div>
       <style>{`
-      @keyframes fall {
-  0% { transform: translateY(-100vh) scale(0.8); opacity: 0.5; }
-  100% { transform: translateY(100vh) scale(1); opacity: 1; }
-}
+        @keyframes fall {
+          0% { transform: translateY(-100vh) scale(0.8); opacity: 0.5; }
+          100% { transform: translateY(100vh) scale(1); opacity: 1; }
+        }
 
         @keyframes rotate {
           0% { transform: rotate(0deg); }
@@ -69,22 +68,22 @@ const KeywordPage = ({ onCorrectKeyword }) => {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-900 text-white">
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-900 text-white px-4 sm:px-8 md:px-12 lg:px-16">
       <input
         type="text"
-        className="px-4 py-2 text-black rounded-lg"
+        className="px-4 py-2 text-black rounded-lg w-full max-w-xs sm:max-w-sm md:max-w-md"
         placeholder="Enter keyword"
         value={input}
         onChange={(e) => setInput(e.target.value)}
       />
-      <button onClick={handleSubmit} className="px-4 py-2 mt-4 bg-blue-500 rounded-lg">
+      <button onClick={handleSubmit} className="px-4 py-2 mt-4 bg-blue-500 rounded-lg w-full max-w-xs sm:max-w-sm md:max-w-md">
         Submit
       </button>
       {error && <p className="text-red-500 mt-2">{error}</p>}
     </div>
   );
 };
-// Floating Lanterns
+
 function FloatingLanterns() {
   const [lanterns, setLanterns] = useState([]);
 
@@ -151,11 +150,10 @@ function FloatingLanterns() {
   );
 }
 
-// Moon and Stars
 function MoonAndStars() {
   return (
     <div className="absolute inset-0 pointer-events-none overflow-hidden">
-      <div className="absolute top-10 right-10 w-40 h-40 bg-yellow-200 rounded-full shadow-lg"></div>
+      <div className="absolute top-10 right-10 w-32 h-32 sm:w-40 sm:h-40 bg-yellow-200 rounded-full shadow-lg"></div>
       {Array.from({ length: 100 }).map((_, index) => (
         <div
           key={index}
@@ -191,12 +189,12 @@ const HomePage = ({ onKeywordEnter }) => {
     <div
       className="flex items-center justify-center"
       style={{
-        height: '100vh', // Full viewport height
-        overflow: 'hidden', // Prevent scrolling
+        height: '100vh',
+        overflow: 'hidden',
         backgroundImage: 'url(/assets/log.jpg)', 
         backgroundSize: 'cover',
         backgroundPosition: 'center',
-        objectFit: 'cover', // Make sure the image fills the area without stretching
+        objectFit: 'cover',
       }}
     >
       <div className="text-center">
@@ -204,7 +202,7 @@ const HomePage = ({ onKeywordEnter }) => {
           <img 
             src="/assets/svg.svg" 
             alt="Enter Icon" 
-            className="w-15 h-12 text-white mr-96 mt-18 ml-9"  
+            className="w-16 h-14 sm:w-20 sm:h-16 text-white"
           />
         </button>
       </div>
@@ -216,11 +214,8 @@ function RomanticNight({ onBack }) {
   const [showMessage, setShowMessage] = useState(false);
   const audioRef = useRef(null);
   useEffect(() => {
-    // Create and play audio
-    audioRef.current = new Audio('/audio/happy-birthday.mp3'); // Add your audio file to public/audio folder
+    audioRef.current = new Audio('/audio/happy-birthday.mp3');
     audioRef.current.play().catch(error => console.log("Audio play failed:", error));
-    
-    // Cleanup audio on unmount
     return () => {
       if (audioRef.current) {
         audioRef.current.pause();
@@ -239,19 +234,19 @@ function RomanticNight({ onBack }) {
       <FloatingLanterns />
       <FloatingLetters />
       <div className="max-w-3xl rounded-xl p-6 text-center backdrop-blur-sm bg-opacity-50 bg-rose-700-400 shadow-2xl absolute bottom-10 left-1/2 transform -translate-x-1/2">
-        {showMessage && (
+        {/* {showMessage && (
           <div>
-            <h1 className="text-6xl font-extrabold text-gradient text-yellow-200 mb-4 transform scale-110 transition-transform duration-300 ease-out text-shadow-lg">
+            <h1 className="text-5xl sm:text-6xl font-extrabold text-gradient text-yellow-200 mb-4 transform scale-110 transition-transform duration-300 ease-out text-shadow-lg">
               My Dearest Love
             </h1>
-            <p className="mt-4 text-lg text-gradient text-white">
+            <p className="mt-4 text-lg sm:text-xl text-gradient text-white">
               Under the moonlight, my heart beats for you. Every star in the sky reminds me of your beauty and the love we share. Tonight, let's make memories that will last a lifetime. ❤️
             </p>
           </div>
-        )}
+        )} */}
         <div className="mt-12">
-          <h2 className="text-xl font-semibold mb-4 text-yellow-200">A Special Message for You:</h2>
-          <p className="text-sm text-white">
+          <h2 className="text-xl sm:text-2xl font-semibold mb-4 text-yellow-200">A Special Message for You:</h2>
+          <p className="text-sm sm:text-base text-white">
             "In your eyes, I found my home. In your heart, I found my love. In your soul, I found my mate. With you, I am whole, full, alive. You make me feel real. I love you, my darling."
           </p>
         </div>
